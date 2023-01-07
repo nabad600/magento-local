@@ -3,7 +3,6 @@ services:
   magento:
     build:
       context: 'magento'
-      dockerfile: 'Dockerfile'
       args:
         - 'USER_ID=${USER_ID}'
         - 'GROUP_ID=${GROUP_ID}'
