@@ -1,0 +1,2 @@
+1. Change APP_CODE_PATH_HOST=<Local drive> in .env file
+2. 
