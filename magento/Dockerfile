@@ -6,7 +6,7 @@ COPY default.conf /etc/nginx/conf.d/default.conf
 
 COPY app.env /app/app.env
 ARG SERVER_ROOT
-ENV MAGENTO_VERSION 2.4.5
+ENV MAGENTO_VERSION 2.4.6
 
 COPY auth.json /root/.composer/auth.json
 # Persistent runtime dependencies
@@ -42,9 +42,9 @@ ARG GROUP_ID
 RUN apk --no-cache add shadow
 RUN if [[ nginx = nginx ]] ; then usermod -u ${USER_ID} nobody && groupmod -g ${GROUP_ID} nobody ; else usermod -u ${USER_ID} apache && groupmod -g ${GROUP_ID} apache ; fi
 RUN cd /app && \ 
-  curl https://codeload.github.com/magento/magento2/tar.gz/2.4.5 -o 2.4.5.tar.gz && \
-  tar xvf 2.4.5.tar.gz 
-COPY index.php /app/magento2-2.4.5/index.php
+  curl https://codeload.github.com/magento/magento2/tar.gz/${MAGENTO_VERSION} -o ${MAGENTO_VERSION}.tar.gz && \
+  tar xvf ${MAGENTO_VERSION}.tar.gz 
+COPY index.php /app/magento2-${MAGENTO_VERSION}/index.php
 COPY env.php /app/env.php
 COPY install.sh /install.sh
 RUN chmod +x /install.sh
